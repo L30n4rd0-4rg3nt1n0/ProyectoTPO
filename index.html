@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Porquería que requiere el navegador de microsoft -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css"> <!-- Hoja de estilo -->
+        <title>Título en pestaña</title> <!-- Texto que aparece en la pestaña del navegador -->
+    </head>
+
+    <body>
+
+        <header> <!-- Cabecera de la página, siempre estará visible -->
+            <h1 class="titulos" id="tituloEncabezado">
+                Título en el encabezado
+            </h1>
+            
+            <p id="textoEncabezado">Encabezado de la página</p>
+            
+            <img id="iconoEncabezado" src="images/tenedor.png"> <!-- Ícono descargado de flaticon relacionado con el producto ofrecido -->
+            
+            <nav class="navegadoras" id="navegadoraPrincipal">
+                Barra de navegación principal <!-- Elige a qué página ir, solo si ya se estuvo ahí -->
+            </nav> 
+        </header>
+
+        <main> <!-- El contenido principal del este sitio -->
+            <section id="tiraDePaginas">
+
+                <section class="paginas" id="paginaHome">
+                    <h2 class="titulos" id="tituloPaginaHome">
+                        Página Home
+                    </h2>
+                    <article class="articulos" id="articuloHome">
+                        <p> Cuerpo principal del Home --- Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorem harum mollitia asperiores ea autem aliquid, iure odio reiciendis, molestiae, tenetur laudantium consequatur. Beatae aut ad dignissimos accusamus sunt quis!
+                        Optio adipisci omnis a corrupti iure ad vel sequi voluptatem natus ducimus facere minus impedit velit quam veniam odio nemo molestiae explicabo nisi, recusandae architecto perspiciatis soluta amet? Eligendi, incidunt!
+                        Soluta, fugit voluptatem. Possimus, reiciendis in inventore accusamus delectus excepturi facere consequatur recusandae repudiandae sapiente error quam dolore. Ipsam facilis libero veniam debitis illum voluptatibus consequuntur quis quaerat molestiae dicta!
+                        </p>                  
+                        <!-- Un vídeo mostrando la virtudes del producto -->
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/UaUtPvHJlXg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+                        <div>
+                            <button onClick="slide('next')">Next</button>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="paginas" id="pagina1">
+                    <h2 class="titulos" id="tituloPagina1">
+                        Página 1
+                    </h2>
+                    <nav class="navegadoras" id="navegadoraPagina1">
+                        Barra de navegación de la página 1 <!-- Puede saltar a página Home, solo página 1 si ya estuvo ahí -->
+                        <div>
+                            <button onClick="slide('prev')">Previous</button>
+                            <button onClick="slide('next')">Next</button>
+                        </div>
+                    </nav>
+                    <article class="articulos" id="articulo1">
+                        <p> Cuerpo principal de la página 1 --- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam eveniet asperiores odit inventore magni dolore perferendis fugit voluptatibus, quis tenetur laborum pariatur, saepe accusamus neque ad dicta voluptatem, molestias modi?
+                        Dolorem, voluptatibus magnam tempore sapiente, consectetur dolorum eveniet nam exercitationem aut recusandae doloremque, dicta obcaecati deleniti temporibus minus? Laboriosam illum officiis porro reiciendis dolore, deserunt repudiandae aliquid! Dolorum, reiciendis saepe?
+                        Ad quam repellendus animi officiis esse nam ipsa dolorem iusto. Facilis ab quod repellendus, provident quas adipisci porro atque sequi, cumque cum numquam eaque, eligendi ipsum laborum voluptates rerum voluptate.
+                        Consequuntur eum dolorum debitis tempora corporis porro numquam voluptatibus perferendis, tenetur placeat eveniet in eaque tempore minima sapiente iste, similique sint odit. Debitis vero cumque doloremque architecto dolorum veniam ab!
+                        Eligendi corporis in ipsam doloribus earum commodi error cumque, nisi porro mollitia cupiditate, sapiente nihil ut fugit sequi perspiciatis tempora nobis eius a ratione laborum laudantium officiis? Ratione, esse sit.
+                        Rem, dignissimos reiciendis dolor ad officia laboriosam neque commodi? Fugit magnam excepturi delectus facilis modi ex totam explicabo tenetur repellat repudiandae, officia molestias deserunt cupiditate dicta soluta iure maiores corporis?
+                        Tenetur possimus quam minima recusandae facilis sed deserunt praesentium voluptas corrupti optio commodi maxime, ipsa ea beatae culpa. Amet necessitatibus minus ex quibusdam rerum quae saepe impedit quidem voluptatibus odit!
+                        Itaque at atque autem velit? Voluptas itaque facere doloremque ab officiis odio sint veritatis! Reiciendis vel a, qui dolores eaque debitis perferendis quasi cum aliquid tempore eos architecto, quos nobis!
+                        Tenetur, laudantium nesciunt. Vero, nulla aperiam earum tenetur quae veritatis eos ipsam asperiores saepe impedit iusto sit consequatur sunt autem, soluta modi molestias iste dolorem distinctio iure veniam praesentium reprehenderit!
+                        Libero quis hic similique nihil eum. Fugiat temporibus praesentium iure veritatis dolorum autem cupiditate rerum reiciendis! Voluptatem est doloribus minima odit enim excepturi deserunt, veniam esse ullam quaerat autem fuga.</p>
+                    </article>
+                </section>
+
+                <section class="paginas" id="pagina2">
+                    <h2 class="titulos" id="tituloPagina2">
+                        Página 2
+                    </h2>
+                    <nav class="navegadoras" id="navegadoraPagina2">
+                        Barra de navegación de la página 2 <!-- Puede saltar a página Home o página 1, solo página 2 si ya estuvo ahí-->
+                        <div>
+                            <button onClick="slide('prev')">Previous</button>
+                            <button onClick="slide('next')">Next</button>
+                        </div>
+                    </nav>
+                    <article class="articulos" id="articulo2">
+                        <p> Cuerpo principal de la página 2 --- Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque corrupti necessitatibus modi quod qui sapiente neque asperiores quis molestiae, soluta earum consectetur numquam beatae eius illum eaque dolorem, deserunt nemo!
+                        Culpa, sit. Illo aliquid saepe accusamus tempora consequatur ut reiciendis similique facilis asperiores sit nam debitis placeat incidunt eaque ipsum magni earum adipisci, possimus sed nihil fugiat obcaecati officia. Ullam!
+                        Inventore eius ipsum aliquid mollitia vitae, dolorem modi quos reiciendis incidunt pariatur consectetur voluptatibus placeat veritatis iusto distinctio asperiores odit delectus officia doloremque illo quaerat ab laborum fuga eos? Vel.
+                        Ipsum enim sapiente iure omnis nihil itaque rem provident perferendis nostrum! Eos magni enim totam at? Quasi mollitia similique nihil. Quaerat repellendus, iste ducimus atque hic quisquam harum fugiat possimus.
+                        Modi repellat expedita molestias molestiae laborum sequi nisi magni? Ipsa quasi, optio delectus soluta molestias dolore ab nihil excepturi blanditiis quod repudiandae molestiae tempora impedit, hic consequuntur, maiores facilis rerum?
+                        Temporibus unde non possimus magnam illo odit nisi provident minus sapiente aut molestias at velit, rem quidem fuga? Facere optio assumenda sit perspiciatis eligendi quae quo nulla modi, iste quas.
+                        Provident reiciendis dolore tempore voluptate, iusto ipsa! Unde consequuntur beatae amet exercitationem mollitia culpa! Debitis voluptas optio facilis quos architecto qui, est officia corporis? Iusto molestiae neque ipsa beatae tempora!
+                        Accusantium fuga ipsa id qui nobis quasi! Obcaecati nihil facilis deserunt illo culpa, aliquid natus eveniet commodi sed perspiciatis blanditiis, aut maxime, repellendus eos? Deleniti inventore rerum molestiae magnam esse!
+                        Maxime, necessitatibus nulla. Dicta modi repudiandae ullam nulla, odio numquam, repellendus doloremque earum libero id, esse laborum! Pariatur iure sint, recusandae vero impedit nesciunt ex corporis nisi inventore nostrum tempora!
+                        Odio et nostrum omnis voluptatibus unde ex ipsam temporibus vero commodi, illo deleniti dolore corporis similique eius, ducimus ullam repudiandae fuga nemo sunt inventore. Minima quidem deleniti est hic architecto!</p>
+                    </article>
+                </section>
+
+                <section class="paginas" id="pagina3">
+                    <h2 class="titulos" id="tituloPagina3">
+                        Página 3
+                    </h2>
+                    <nav class="navegadoras" id="navegadoraPagina3">
+                        Barra de navegación de la página 3 <!-- Puede saltar a página Home o página 2 -->
+                        <div>
+                            <button onClick="slide('prev')">Previous</button>
+                        </div>
+                    </nav>
+                    <article class="articulos" id="articulo3">
+                        <p> Cuerpo principal de la página 3 --- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, ea iste! Quam corporis, mollitia voluptate maxime dolore, aperiam recusandae cupiditate aspernatur quis officia nulla quaerat, itaque perspiciatis ex sunt et.
+                        Ducimus, nisi quae totam, fugit consequatur perspiciatis odio optio consectetur earum vel fugiat numquam dignissimos? Quidem ab et excepturi. Porro illum saepe dolorem quae mollitia molestias ea ipsa, id velit.
+                        Sit qui animi odio inventore illum ullam. Eaque facere, itaque rem iusto officiis sequi quia excepturi, quos rerum porro reiciendis dignissimos et recusandae, quis necessitatibus maiores iure suscipit. Reprehenderit, necessitatibus?
+                        Distinctio neque aliquid, ab ipsam laboriosam a ea veniam sit quam odit laborum nobis voluptates sint quibusdam assumenda culpa et incidunt! Quisquam tenetur beatae, est asperiores sequi molestiae amet adipisci!
+                        Ipsum voluptatibus architecto ratione optio eum accusamus vitae delectus officia voluptas. Voluptates ducimus porro provident quasi cum? Nostrum laboriosam soluta, rem quasi quidem eligendi dolor ab accusamus ipsam dolores adipisci?
+                        Aliquam quia atque quod blanditiis, aperiam modi similique debitis maxime sunt quaerat esse veniam error fugit soluta aliquid aspernatur cumque corporis quibusdam ut? Ipsum laboriosam commodi impedit molestiae autem veritatis.
+                        Ex ad libero eaque cum? Saepe debitis esse mollitia. Veniam, quas sapiente at ab ipsum neque debitis labore, consequuntur odio dolorum, magnam tenetur minima vero? Cupiditate distinctio quos consequatur quasi.
+                        Quae necessitatibus perspiciatis neque sapiente unde molestias fuga repellat natus quos, optio quia recusandae, dignissimos numquam, iste voluptates quas voluptatibus explicabo. Sed veritatis ab explicabo repellat neque expedita, odit aut?
+                        Explicabo, labore. Nisi omnis voluptate voluptatum sit iste hic recusandae voluptas ratione, tempore maiores labore, aspernatur ullam iure totam. At omnis sit laudantium consequatur dicta exercitationem nobis asperiores veniam porro.
+                        Asperiores doloribus, incidunt magni vero repellendus praesentium minima quaerat esse eveniet libero. Cum, quam eum sed nulla quas dolores perferendis molestiae impedit dolorem itaque, quae quos molestias repudiandae, optio reiciendis!</p>
+                    </article>
+                </section>
+
+            </section>
+        </main>
+
+        <footer>
+            <p id="reconocimientos">Un footer con información de derechos, contacto, etc. --- 
+            <a href="https://www.flaticon.es/iconos-gratis/tenedor" title="tenedor iconos">Tenedor iconos creados por Freepik - Flaticon</a>;
+            Copyright 2010 The Lobster Project Authors (<a href="https://github.com/impallari/The-Lobster-Font">Fuentes Lobster</a>), with Reserved Font Name "Lobster".
+            <!--Realmente la descargué de https://fonts.google.com/specimen/Lobster pero en la documentación decía eso-->
+            </p>
+        </footer>
+        
+        <!-- El script se coloca acá, al final, luego que todo en la página ya fue definido, sino entraría en conflicto -->
+        <script  src="js/script.js"></script>
+        
+    </body>
+</html>

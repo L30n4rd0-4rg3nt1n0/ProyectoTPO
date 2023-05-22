@@ -1,0 +1,178 @@
+/* Hay que meter mucha mano acá y modificar cosas */
+
+/* ************************************************************************* */
+/* ESTILO RESPONSIVE */
+
+/* De momento no tengo ningún contenido que se beneficie de diseño responsive solo cambio color del fondo */
+
+/* Explicación de como se razonan los puntos de corte */
+
+/* Según he leído, históricamente la unidad 1em era igual al ancho de una letra "M" */
+/* Una letra "M" en tamaño default y tipografía default históricamente tendría 16pixeles */
+/* Es decir, en un monitor full-hd deberían entrar 1920/16=120 */
+/* La verdad es que con tipografia default y tamaño "real" en mi navegador entran 123 o 124 letras "M" */
+/* Además aunque ponga 120em como punto de corte, recién al 80% del tamaño "real" sucede el corte */
+/* Debo asumir que en mi caso uso una tipografía por defecto distinta a la histórica */
+/* Por lo que realmente no estoy seguro en qué condiciones 1em equivale a una letra "M" */
+/* Pero para poder hacer el siguiente razonamiento voy a suponer que entra 120 letras "M" en un monitor */
+/* (las conclusiones debería escalarle sin mayor problema) */
+/* Es decir, lo importante es una cantidad que resulte en una cómoda visualización en el monitor */
+/* Digamos son Xem, bueno entonces se escalean todos los puntos de corte con un factor X/120 */
+/* Parece que ajustando (ver más abajo) el atributo "font-size" se logra hacer algo equivalente para la tipografía en uso */
+/* A su vez el usuario escalea a gusto la pantalla, por lo que no es algo que debería quitar el sueño */
+/* La referencia que uno fija con los puntos de corte se ajusta al escaleado que escoge el usuario */
+
+/* Dicho eso supongamos que... */
+
+/* Un monitor 24 pulgadas FHD tiene aprox. 52cm de ancho y, al menos yo, lo uso a 65cm de la cara */
+/* Es decir, como 1920/16=120, la letra "M" tendría un ancho de 52cm/120=0.43cm aprox. */
+/* La tangente del ángulo de visión es proporcional a la relación ancho/distancia */
+/* para la "M" en el monitor sería 0.43/65=0.0067 aprox. */
+
+/* Un celular de gama media y tamaño medio, también tiene pantalla full-hd... pero es más pequeño */
+/* En mi caso mide 11.5cm del lado más largo y me resulta natural ubicarlo a 40 cm de la cara */
+/* Luego la "M" default mediría 11.5cm/120=0.096cm aprox. y la relación sería 0.096/40=0.0024 aprox. */
+
+/* "Angularmente" la "M" tendría un "tamaño" del 36% respecto del monitor (pues 0.0024/0.0067=0.36) */
+
+/* Eso implica que para ver la letra "M" igual se la debería incrementar en un factor 1/0.36=2.78 aprox. */
+
+/* En general desconocemos el tamaño del dispositivo y la distancia a los ojos del usuario */
+/* No obstante... Es el usuario quien ajusta el tamaño del texto */
+/* (haciendo zoom con el gesto de apertura de dedos hasta un tamaño confortable) */
+/* Podemos asumir que entonces incrementaría el tamaño de la "M" es un factor 2.78 */
+/* Eso quiere decir que si en un monitor entraran 120 "M", en el teléfono entrarían 120/2.78=43 aprox */
+
+/* Esto podría permitirnos pensar que un monitor llega a 120em y un celular, puesto apaisado, a unos 43em */
+/* Pero un celular normalmente se usar en modo vertical, si es proporción 16:9, serían 43*9/16=24em aprox */
+
+/* Con ese razonamiento podemos pensar 3 puntos de corte 24em, 43em, 120em */
+/* ESTOY ASUMIENDO QUE ES EL USUARIO QUIEN AJUSTA A GUSTO EL TAMAÑO DE LA LETRAS, NO EL DISEÑO RESPONSIVE */
+
+/* Y aunque es difícil estar seguro en qué caso tocará cada corte la expectativa en la siguiente: */
+
+/* Quizás celular que llega hasta resolución de 1080px de ancho (puesto vertical)*/
+@media only screen and (max-width: 24em) 
+  {
+    body {
+      background: pink;
+    }
+  }
+
+/* Quizás celular que llega hasta resolución de 1920px de ancho (puesto apaisado) */ 
+@media only screen and (min-width:24em) and (max-width: 43em) 
+  {
+    body {
+      background:yellow;
+    }
+  }
+
+/* Quizás pantalla de escritorio que llega hasta full-hd (1920px de ancho)*/
+@media only screen and (min-width:43em) and (max-width: 120em) 
+  {
+    body{
+      background: lightgreen;
+    }
+  }
+
+/* Quizás pantalla de escritorio con más resolución que full-hd ¿quizás 2k o 4k?*/
+@media only screen and (min-width: 120em) 
+  {
+    body {
+      background: white;
+    }
+  }
+
+/* ************************************************************************* */
+
+*{ /* Configuración para TODOS los elementos del sitio */
+	margin: 0;
+	padding: 0;
+}
+
+@font-face { /* Especifica una fuente personalizada con la cual mostrar texto */
+  font-family: fuenteLobster;
+  src: url(../fonts/Lobster-Regular.ttf); /* Está almacenada localmente */
+}
+
+html { /* Asigna la fuente a todo el documento */
+  font-family: fuenteLobster;
+  /* Haciendo zoom en mi navegador ajusté este valor a ojo */ 
+  /* Justo al último punto de corte llena aproximadamente 120 letras "M" en el ancho del monitor */
+  font-size: 24px;
+}
+
+main{ /* Acá main es el "contenedor" de las páginas deslizables */  
+	width: 100%; /* Puesto que en este sitio no tiene un "aside" acá se asigna 100% del ancho */
+	overflow: hidden;
+}
+
+header{
+  background-color: floralwhite;
+  color: black;
+  position: sticky; /* Para que quede "pegado" aunque haga scroll */
+  top: 0;/* Posición donde debe quedar pegado */
+  height: 20vh;
+}
+
+/* hijo de header */
+#iconoEncabezado{
+  height: 25%; /*altura 25% de header*/
+  width: auto;
+}
+
+
+#tiraDePaginas{ /* Puede pensarse como una tira horizontal de páginas a ser mostradas */
+  display: flex;
+  width: 400%; /* Su ancho es 100 x Nro de páginas deslizables */
+	box-sizing: border-box;	
+}
+
+.paginas {
+  width: 100%; /* A cada página deslizable se le da el ancho del contenedor */
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+	gap: 10px;
+  transition: all 0.7s;
+  color: white;
+}
+
+/* solamente para que se distingan colores */
+#paginaHome{
+  background: orangered;
+}
+
+#pagina1{
+  background-color: dodgerblue;
+}
+
+#pagina2{
+  background-color: indigo;
+}
+
+#pagina3{
+  background-color: limegreen;
+}
+
+button{ /* Definición de varias características de estilo de botón */
+  padding: 8px;
+  width: 100px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.1s;
+}
+
+button:hover{ /* Pseudo-clase que corresponde a evento de colocar el puntero sobre el botón */
+  transform: scale(1.05); /* Efecto de agrandar levemente el botón al posarse encima */
+}
+
+/* ************************************************************************* */
+
+
+
