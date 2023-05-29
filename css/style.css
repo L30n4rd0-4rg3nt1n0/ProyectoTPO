@@ -1,93 +1,20 @@
-/* Hay que meter mucha mano acá y modificar cosas */
+/* Acá se eliminan margenes, bordes y relleno (padding) en todos lados */
+/* Después más abajo se ve donde se re-instauran o ajustan si son necesarios */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 
-/* ************************************************************************* */
-/* ESTILO RESPONSIVE */
-
-/* De momento no tengo ningún contenido que se beneficie de diseño responsive solo cambio color del fondo */
-
-/* Explicación de como se razonan los puntos de corte */
-
-/* Según he leído, históricamente la unidad 1em era igual al ancho de una letra "M" */
-/* Una letra "M" en tamaño default y tipografía default históricamente tendría 16pixeles */
-/* Es decir, en un monitor full-hd deberían entrar 1920/16=120 */
-/* La verdad es que con tipografia default y tamaño "real" en mi navegador entran 123 o 124 letras "M" */
-/* Además aunque ponga 120em como punto de corte, recién al 80% del tamaño "real" sucede el corte */
-/* Debo asumir que en mi caso uso una tipografía por defecto distinta a la histórica */
-/* Por lo que realmente no estoy seguro en qué condiciones 1em equivale a una letra "M" */
-/* Pero para poder hacer el siguiente razonamiento voy a suponer que entra 120 letras "M" en un monitor */
-/* (las conclusiones debería escalarle sin mayor problema) */
-/* Es decir, lo importante es una cantidad que resulte en una cómoda visualización en el monitor */
-/* Digamos son Xem, bueno entonces se escalean todos los puntos de corte con un factor X/120 */
-/* Parece que ajustando (ver más abajo) el atributo "font-size" se logra hacer algo equivalente para la tipografía en uso */
-/* A su vez el usuario escalea a gusto la pantalla, por lo que no es algo que debería quitar el sueño */
-/* La referencia que uno fija con los puntos de corte se ajusta al escaleado que escoge el usuario */
-
-/* Dicho eso supongamos que... */
-
-/* Un monitor 24 pulgadas FHD tiene aprox. 52cm de ancho y, al menos yo, lo uso a 65cm de la cara */
-/* Es decir, como 1920/16=120, la letra "M" tendría un ancho de 52cm/120=0.43cm aprox. */
-/* La tangente del ángulo de visión es proporcional a la relación ancho/distancia */
-/* para la "M" en el monitor sería 0.43/65=0.0067 aprox. */
-
-/* Un celular de gama media y tamaño medio, también tiene pantalla full-hd... pero es más pequeño */
-/* En mi caso mide 11.5cm del lado más largo y me resulta natural ubicarlo a 40 cm de la cara */
-/* Luego la "M" default mediría 11.5cm/120=0.096cm aprox. y la relación sería 0.096/40=0.0024 aprox. */
-
-/* "Angularmente" la "M" tendría un "tamaño" del 36% respecto del monitor (pues 0.0024/0.0067=0.36) */
-
-/* Eso implica que para ver la letra "M" igual se la debería incrementar en un factor 1/0.36=2.78 aprox. */
-
-/* En general desconocemos el tamaño del dispositivo y la distancia a los ojos del usuario */
-/* No obstante... Es el usuario quien ajusta el tamaño del texto */
-/* (haciendo zoom con el gesto de apertura de dedos hasta un tamaño confortable) */
-/* Podemos asumir que entonces incrementaría el tamaño de la "M" es un factor 2.78 */
-/* Eso quiere decir que si en un monitor entraran 120 "M", en el teléfono entrarían 120/2.78=43 aprox */
-
-/* Esto podría permitirnos pensar que un monitor llega a 120em y un celular, puesto apaisado, a unos 43em */
-/* Pero un celular normalmente se usar en modo vertical, si es proporción 16:9, serían 43*9/16=24em aprox */
-
-/* Con ese razonamiento podemos pensar 3 puntos de corte 24em, 43em, 120em */
-/* ESTOY ASUMIENDO QUE ES EL USUARIO QUIEN AJUSTA A GUSTO EL TAMAÑO DE LA LETRAS, NO EL DISEÑO RESPONSIVE */
-
-/* Y aunque es difícil estar seguro en qué caso tocará cada corte la expectativa en la siguiente: */
-
-/* Quizás celular que llega hasta resolución de 1080px de ancho (puesto vertical)*/
-@media only screen and (max-width: 24em) 
-  {
-    body {
-      background: pink;
-    }
-  }
-
-/* Quizás celular que llega hasta resolución de 1920px de ancho (puesto apaisado) */ 
-@media only screen and (min-width:24em) and (max-width: 43em) 
-  {
-    body {
-      background:yellow;
-    }
-  }
-
-/* Quizás pantalla de escritorio que llega hasta full-hd (1920px de ancho)*/
-@media only screen and (min-width:43em) and (max-width: 120em) 
-  {
-    body{
-      background: lightgreen;
-    }
-  }
-
-/* Quizás pantalla de escritorio con más resolución que full-hd ¿quizás 2k o 4k?*/
-@media only screen and (min-width: 120em) 
-  {
-    body {
-      background: white;
-    }
-  }
-
-/* ************************************************************************* */
-
-*{ /* Configuración para TODOS los elementos del sitio */
-	margin: 0;
-	padding: 0;
+/* Se explicita que la altura y ancho de estas "cajas" deben llenar toda la pantalla */
+/* Por algún motivo parece que no lo asume por defecto */
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 
 @font-face { /* Especifica una fuente personalizada con la cual mostrar texto */
@@ -95,71 +22,319 @@
   src: url(../fonts/Lobster-Regular.ttf); /* Está almacenada localmente */
 }
 
-html { /* Asigna la fuente a todo el documento */
-  font-family: fuenteLobster;
-  /* Haciendo zoom en mi navegador ajusté este valor a ojo */ 
-  /* Justo al último punto de corte llena aproximadamente 120 letras "M" en el ancho del monitor */
-  font-size: 24px;
+body{
+  font-family: fuenteLobster; /* Asigna la fuente a todo el documento */
+  /* Con la vista de Firefox puesta en "tamaño real" para que aprox 120 caracteres "M"
+  de esta tipografía escogida abarcara casi todo el ancho del monitor.
+  En Chrome por defecto se ve un poco más chico, pero yo tomo Firefox como mi norma. */
+  font-size: 1.13em; /* Esto se re-escribe en algunas partes y no se aplica a botones */
 }
 
-main{ /* Acá main es el "contenedor" de las páginas deslizables */  
-	width: 100%; /* Puesto que en este sitio no tiene un "aside" acá se asigna 100% del ancho */
-	overflow: hidden;
+/* 'header', 'footer' y 'main' van como items del contenedor FlexBox 'frente' */
+#frente, #fondo {/* Ambos ocupan el "mismo" lugar */
+  left: 0;
+  top: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 
-header{
-  background-color: floralwhite;
-  color: black;
-  position: sticky; /* Para que quede "pegado" aunque haga scroll */
-  top: 0;/* Posición donde debe quedar pegado */
-  height: 20vh;
+#fondo{
+  z-index: 50; /* El fondo está más abajo*/
+  background-color:black;
+}
+
+#videoFondo {
+  pointer-events: none; /* Para que el video no reaccione al click de mouse */
+  /*filter: grayscale(0.8);*/ /* /*Se podría aplicar un filtro al video */
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+#frente {
+  z-index: 100; /* El frente está más arriba */
+  background: rgba(0,0,0,0);/* el último caracter es la transparencia */
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: column; /* Un contenedor en forma de columna */
+}
+
+header,
+footer {
+  flex: none; /* Su altura se ajusta al contenido y podría rebasar al contenedor (frente) */
+  background-color: rgb(8, 0, 14); /* Color del fondo */
+  color: floralwhite; /* Color del texto */
+  width: 100%; /* Explicito que abarca todo el ancho (de frente) pero al parecer es redundante */
+}
+
+/* hijo de header*/
+#logo{
+  font-size: 120%; /* Porcentaje del tamaño en header */
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: column; /* Un contenedor en forma de columna */
+  align-items: center;
+  padding-right: 1em;
+  padding-top: 0.5em;  
+}
+/* este y h1 son hijos de logo */
+#leyendaEncabezado{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* Un contenedor en forma de fila */
+  font-size: 92%; /* Porcentaje del tamaño en logo */
+}
+/* hijos de leyendaEncabezado (items de un FlexBox)*/
+#iconoEncabezado1, #iconoEncabezado2{
+  height: 2em; /* Un tamaño ligado al del texto */
+  width: auto; /* respetando al proporción escalea al ancho*/
+}
+#iconoEncabezado1{
+  order: 10;
+}
+#textoEncabezado{
+  order: 20;
+  padding: 0.5em;
+}
+#iconoEncabezado2{
+  order: 30;
 }
 
 /* hijo de header */
-#iconoEncabezado{
-  height: 25%; /*altura 25% de header*/
-  width: auto;
+#navegadoraPrincipal{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* Un contenedor en forma de fila */
+  justify-content: space-around; /* botones igual separados y con espacios de cada lado */
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
+/* hijo de footer */
+#reconocimientos {
+  font-size: 65%; /* Porcentaje del tamaño en body, un valor aceptable para un footer discreto */
+  /*font-size: 0.68em;*/ /* Un valor que me parece aceptable para texto en un footer más discreto */
+  padding: 1em;
+}
 
-#tiraDePaginas{ /* Puede pensarse como una tira horizontal de páginas a ser mostradas */
-  display: flex;
-  width: 400%; /* Su ancho es 100 x Nro de páginas deslizables */
-	box-sizing: border-box;	
+main {
+  flex: auto; /* Se ajusta para llenar el espacio restante del contenedor (frente) descontando header y footer */
+  width: 100%; /* 100% del ancho de frente */
+  overflow-x: hidden; /* Cualquier contenido de main que horizontalmente rebase su ancho definido se oculta (no scrollea) */
+  overflow-y: hidden; /* Al no ser scrollable su tamaño se limita a lo que se ve entre header y footer */
+  background: radial-gradient(/* degradé con transparencias */
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.7) 25%, 
+    rgba(0,0,0,1.0) 50%,
+    rgb(8, 0, 14) 65%); 
+}
+
+/* La sección con id="filaDePaginas" es hija de main */
+/* Es la contenedora de otro FlexBox en el que cada página es un item */
+#filaDePaginas{  
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* No parece necesario explicitarlo pero por las dudas lo agrego */
+  width: 400%; /* Su ancho es 100%(de main) x Nro de páginas deslizables definidas */
+  height: 100%; /* Tiene que tener el 100% de altura que 'main' */
+  overflow-x: hidden;
 }
 
 .paginas {
-  width: 100%; /* A cada página deslizable se le da el ancho del contenedor */
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-	gap: 10px;
-  transition: all 0.7s;
-  color: white;
+  flex-grow: 1;  /*... Con esta y la siguiente línea todos los items son de igual ancho */
+  flex-basis: 0; /*... Es decir todas las paginas se reparten igual en el ancho de filaDePaginas */
+  overflow-y: scroll; /* Cada página permite su propio scrolleo vertical*/
+  overflow-x: hidden; /* Lo que se salga de la "caja" se oculta, pero si se hacen las cosas bien nada debería salirse */
+  transition: all 0.7s; /* Cuando se ordene el cambio de cualquier propiedad (vía js) se realizará en 0.7s */
+  color: white; /* Color del texto en las páginas */
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: 150%; /* Porcentaje del tamaño en filaDePaginas */
 }
 
-/* solamente para que se distingan colores */
-#paginaHome{
-  background: orangered;
-}
-
+/* hijo de filaDePaginas */
 #pagina1{
-  background-color: dodgerblue;
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: column; /* Un contenedor en forma de columna */
+  justify-content: space-around; /* items igual separados y con espacios de arriba y abajo */
+}
+/* hijo de pagina1 */
+#navegadoraPagina1{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* Un contenedor en forma de fila */
+  justify-content: flex-end;
+}
+#navegadoraPagina1>div>button{
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }
 
+
+/* hijo de filaDePaginas */
 #pagina2{
-  background-color: indigo;
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: column; /* Un contenedor en forma de columna */
+  justify-content: space-between; /* items igual separados sin espacios arriba y abajo */
 }
+/* hijo de pagina2 */
+#navegadoraPagina2{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* Un contenedor en forma de fila */
+  justify-content: flex-end;
+}
+/* NOTA SOBRE 'pagina2' */
+/* space-around y space-evenly me funcionan mal, no entiendo por qué */
+/* Achicando ancho de pantalla, el contenido Grid 'album' genera un área de scrolleo */
+/* Lo cual no debería ser problema, ya que todo fue construido para que cada página scrollé entre header y footer */
+/* Pero la parte superior de pagina2 es empujada por arriba afuera de la caja (y ya no es visible) */
+/* Uso el siguiente workaround para emparchar la falta de espacios */
+#pagina2{
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+/* ************************************************************************* */
+/* pagina2->articulo2->album */
+/* Esta parte usa Media Queries sobre un contenedor Grid llamado 'album' */
+/* Album contiene varias fotos */
+/* Va cambiando cantidad de columnas y tamaño de las fotos según ancho de pantalla */
+/* Tiene varios puntos de corte para dar una experiencia relativamene suave */
+/* Ya sea al reducir el ancho de pantalla, hacer zoom con la rueda del mouse, */
+/* o visualizar en dispositivos con distintas resoluciones */
 
+#album{
+  width: 100%; /* porcentaje del padre de album */
+  display: grid; 
+  grid-gap: 0.3em;
+  justify-content: center;
+}
+@media only screen and (max-width: 190px) 
+{
+  #album{
+      grid-template-columns: auto;
+  }
+  .fotos{
+      width: 100%; /* porcentaje del tamaño de la celda (si no se define 'album' como contenedor grid sería 100% de 'album')*/
+      height: auto;
+  }
+}
+@media only screen and (min-width: 190px) 
+{
+  #album{
+  grid-template-columns: 150px;
+  }
+  .fotos{
+  width: 150px;
+  height: auto;
+  }
+}
+@media only screen and (min-width: 320px) 
+{
+  #album{
+  grid-template-columns: 150px 150px;
+  }
+}
+@media only screen and (min-width: 680px) 
+{
+  #album{
+  grid-template-columns: 150px 150px 150px 150px;
+  }
+}
+@media only screen and (min-width: 850px) 
+{
+  #album{
+  grid-template-columns: 150px 150px 150px 150px 150px;
+  }
+}
+@media only screen and (min-width: 900px) 
+{
+  #album{
+  grid-template-columns: auto auto auto auto auto;
+  }
+  .fotos{
+  width: 100%;
+  height: auto;
+  }
+}
+@media only screen and (min-width: 1100px) 
+{
+  #album{
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 2%;
+  }
+  .fotos{
+  width: 200px;
+  height: auto;
+  }
+}
+/* ************************************************************************* */
+
+
+/* hijo de filaDePaginas */
 #pagina3{
-  background-color: limegreen;
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: column; /* Un contenedor en forma de columna */
+  /* Mismo problema que tenía en pagina2, mismo parche */
+  justify-content: space-between;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;  
 }
 
-button{ /* Definición de varias características de estilo de botón */
+/* hijo de pagina3 */
+#articulo3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* hijos de articulo3 */
+#parrafo3{
+  width: 100%;
+  padding-right: 1em;
+  box-sizing: border-box;	/* padding, bordes, todo queda incluido en width */
+}
+#mapaUbicacion {
+  width: 500px;
+  height: 480px;  
+}
+@media only screen and (min-width: 60em) 
+{
+  #parrafo3{
+    max-width: calc(100% - 500px); /* Voy a dejar el ancho del mapa fijo en 500px */   
+  }
+}
+
+/* hijo de pagina3 */
+#navegadoraPagina3{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* Un contenedor en forma de fila */
+  justify-content: flex-end;
+}
+
+
+/* hijo de filaDePaginas */
+#pagina4{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: column; /* Un contenedor en forma de columna */
+  /* No vi si tenía mismo problema que tenía en página 2 pero por prevenir uso mismo parche */
+  justify-content: space-between;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;  
+}
+/* hijo de pagina4 */
+#navegadoraPagina4{
+  display: flex; /* Para que sea un contenedor FlexBox */
+  flex-direction: row; /* Un contenedor en forma de fila */
+  justify-content: flex-end;
+}
+
+#formulario>div{
+  padding: 1em; /* Para separar un poco cada campo del formulario */
+}
+
+
+/* Cierto tipo como elementos de formularios y botones no heredan las configuraciones de fuente */
+/* En general eso se aplica a todo los elementos de ingreso de datos (no es el caso de los 'label') */
+/* Por ese motivo deben especificarse explícitamente */
+button, input[type="submit"]{ /* Definición de varias características de estilo de botón */
   padding: 8px;
-  width: 100px;
+  width:auto;
+  min-width: 100px;
   border: 2px solid white;
   background-color: transparent;
   color: white;
@@ -172,7 +347,6 @@ button:hover{ /* Pseudo-clase que corresponde a evento de colocar el puntero sob
   transform: scale(1.05); /* Efecto de agrandar levemente el botón al posarse encima */
 }
 
-/* ************************************************************************* */
-
-
-
+input[type="submit"]:hover{ /* Pseudo-clase que corresponde a evento de colocar el puntero sobre el botón */
+  transform: scale(1.05); /* Efecto de agrandar levemente el botón al posarse encima */
+}

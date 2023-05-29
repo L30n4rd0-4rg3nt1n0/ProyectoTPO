@@ -5,134 +5,239 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Porquería que requiere el navegador de microsoft -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css"> <!-- Hoja de estilo -->
-        <title>Título en pestaña</title> <!-- Texto que aparece en la pestaña del navegador -->
+        <link rel="stylesheet" href="css/style.css"> <!-- Hoja de estilo local -->
+        <!-- Estas dos líneas cargando "dependencias" son necesarias para el consumo de la API de leaflet (mapa) -->
+        <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+        <title>Degustaciones Gourmet</title> <!-- Texto que aparece en la pestaña del navegador -->
+        <link rel="icon" type="image/x-icon" href="images/fast-food_invertido.png"> <!-- Ícono que aparece en la pestaña del navegador -->
     </head>
 
     <body>
+        <!-- Se crean dos contenedores <div> uno llamado 'frente' y otro llamado 'fondo' -->
+        <!-- 'frente' contiene todo el documento visible como se tendría siempre... pero con algunas transparencias -->
+        <!-- Lo cierto es que hasta casi último momento toda la web se diseñó con el contenido de 'frente' directamente puesto en body -->
+        <!-- Pero luego se agregó un 'fondo' que contiene un vídeo que se carga con un iframe -->
 
-        <header> <!-- Cabecera de la página, siempre estará visible -->
-            <h1 class="titulos" id="tituloEncabezado">
-                Título en el encabezado
-            </h1>
+        <div id="frente">
+            <!-- En el .css se configura todo para dejar header y footer fijos -->
+            <header>
+                <div id="logo"> <!-- El título y una pequeña leyenda constituyen una especie de "logo" -->
+                    <h1 class="titulos" id="tituloEncabezado"> <!-- Única etiqueta h1 representa el nombre de la página -->
+                        Pampa y la vía
+                    </h1>
+                    <div id="leyendaEncabezado">
+                        <p id="textoEncabezado">Un lugar que sí existe</p>
+                        <img id="iconoEncabezado1" src="images/restaurant_invertido.png"> <!-- Ícono descargado de flaticon-->
+                        <img id="iconoEncabezado2" src="images/fast-food_invertido.png"> <!-- Ícono descargado de flaticon-->
+                    </div>
+                </div>
+                <nav class="navegadoras" id="navegadoraPrincipal">
+                        <button onClick="saltar('pagina1')">Inicio</button>
+                        <button onClick="saltar('pagina2')">Presentación</button>
+                        <button onClick="saltar('pagina3')">Ubicación</button>
+                        <button onClick="saltar('pagina4')">Reserva</button>
+                </nav>
+            </header>
+
+            <main> <!-- El contenido principal del este sitio -->
+                <section id="filaDePaginas">
+
+                    <section class="paginas" id="pagina1">
+                        <h2 class="titulos" id="titulo1">
+                            ¡Bienvenid@! <!-- No, no, no... No es lenguaje inclusivo, es jerga de foros de los años 200X -->
+                        </h2>
+                        <article class="articulos" id="articulo1">
+                            <!--<p>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</p>-->
+                            <p>Sentite como en casa pero con la atención más distinguida</p>
+                            <p>Nos honraría que recorrieses nuestro sitio y nos conocieras mejor</p>
+                        </article>
+                        <nav class="navegadoras" id="navegadoraPagina1">
+                            <p>Disfrutá la experiencia</p>
+                            <div>
+                                <button onClick="deslizar('avanzar')">Comenzar</button>                            
+                            </div>
+                        </nav>
+                    </section>
+
+                    <section class="paginas" id="pagina2">
+                        <h2 class="titulos" id="tituloPagina2">
+                            ¿Quiénes somos?
+                        </h2>
+                        <article class="articulos" id="articulo2">
+                            <p> Somos un conjunto de emprendedores con una pasión por el buen gusto culinario. Nuestro objetivo es deleitar tu paladar con los más refinados platos de la alta cocina callejera y chatarra. Vos te lo merecés, vos lo querés, vos lo necesitás. Nosotros te lo proveemos.</p>
+                            <div id="album">
+                                <img class="fotos" id="foto1" src="images/vista-frontal-hamburguesa-stand.jpg">
+                                <img class="fotos" id="foto2" src="images/bodegon-deliciosa-hamburguesa-americana.jpg">
+                                <img class="fotos" id="foto3" src="images/captura-pantalla-cocinero-que-coloca-tocino-frito-sobre-rebanada-queso-mientras-prepara-hamburguesa.jpg">
+                                <img class="fotos" id="foto4" src="images/sandwich-grande-varios-tipos-carne-maiz-algunas-hamburguesas-alrededor.jpg">
+                                <img class="fotos" id="foto5" src="images/vista-frontal-mujer-comiendo-hamburguesas-carne.jpg">
+                                <img class="fotos" id="foto6" src="images/tendir-doner-pollo-mesa.jpg">
+                                <img class="fotos" id="foto7" src="images/tipos-sandwich-mixto-varios-alimentos-tabla-madera.jpg">
+                                <img class="fotos" id="foto8" src="images/arreglo-deliciosos-hot-dogs.jpg">
+                                <img class="fotos" id="foto9" src="images/vista-frontal-hot-dog-fondo-negro-espacio-copia.jpg">
+                                <img class="fotos" id="foto10" src="images/hot-dog-alta-vista-encurtidos-patatas-fritas.jpg">        
+                            </div>
+                        </article>
+                        <nav class="navegadoras" id="navegadoraPagina2">
+                            <button onClick="deslizar('retroceder')">Previo</button>
+                            <button onClick="deslizar('avanzar')">Siguiente</button>
+                        </nav>
+                    </section>
+
+                    <section class="paginas" id="pagina3">
+                        <h2 class="titulos" id="tituloPagina3">
+                            Ubicación
+                        </h2>
+                        <article class="articulos" id="articulo3">
+                            <p id="parrafo3">
+                                ¿No lo podés creer? ¡Pero es así!. Luego de conocernos vas a decirle a todos que Pampa y la vía es un lugar que sí existe. Nos encontramos ubicados en un punto clave y exclusivo de la ciudad de Mar del Plata. Justo justito en la calle <em>La Pampa</em>, sobre los rieles de un ramal abandonado, frente a la entrada de la estación ferroautomora. El mejor puesto improvisado, no registrado, ilegal y callejero de la ciudad. Aprovechá a visitarnos antes que nos corran. ¡Vos te lo merecés!
+                            </p>
+                            <div id="mapaUbicacion"></div> <!-- Acá va mapa con locación de la empresa, insertado con código javascript -->
+                        </article>
+                        <nav class="navegadoras" id="navegadoraPagina3">
+                            <div>
+                                <button onClick="deslizar('retroceder')">Previo</button>
+                                <button onClick="deslizar('avanzar')">Siguiente</button>
+                            </div>
+                        </nav>
+                    </section>
+
+                    <section class="paginas" id="pagina4">
+                        <h2 class="titulos" id="tituloPagina4">
+                            Reservá antes que nadie
+                        </h2>
+                        <article class="articulos" id="articulo4">
+                            <form action="mailto:leo.argentino.mdp@gmail.com" method="post" enctype="text/plain" target="_blank" id="formulario">
             
-            <p id="textoEncabezado">Encabezado de la página</p>
-            
-            <img id="iconoEncabezado" src="images/tenedor.png"> <!-- Ícono descargado de flaticon relacionado con el producto ofrecido -->
-            
-            <nav class="navegadoras" id="navegadoraPrincipal">
-                Barra de navegación principal <!-- Elige a qué página ir, solo si ya se estuvo ahí -->
-            </nav> 
-        </header>
+                                <!-- Curioso, Chrome y Firefox agregan 5 espacios al especificado por "size" -->
+                                <!-- Restando esa cantidad a la usada en maxlength quedan iguales -->
+                                <div>
+                                    <label for="nombreInput">(*) Tu nombre: </label>
+                                    <input type="text" size="20" maxlength="25" name="nombre" id="nombreInput">
+                                </div>
 
-        <main> <!-- El contenido principal del este sitio -->
-            <section id="tiraDePaginas">
+                                <div>
+                                    <p id="preguntaPlato">(*) ¿Qué plato base desearías degustar?: </p>
+                                    <input type="radio" name="plato" id="plato1" class="platos" value="Pancho">
+                                    <label for="plato1">Pancho Clásico - XX$</label><br>
+                                    <input type="radio" name="plato" id="plato2" class="platos" value="Moby Dick">
+                                    <label for="plato2">Pancho Moby Dick - XX$</label><br>
+                                    <input type="radio" name="plato" id="plato3" class="platos" value="Hamburguesa">
+                                    <label for="plato3">Hamburguesa Clásica - XX$</label><br>
+                                    <input type="radio" name="plato" id="plato4" class="platos" value="Rueda de tractor">
+                                    <label for="plato4">Hamburguesa "Rueda de tractor" - XX$</label><br>
+                                    <input type="radio" name="plato" id="plato5" class="platos" value="Pollo">
+                                    <label for="plato5">Sandwich de Pollo - XX$</label><br>
+                                    <input type="radio" name="plato" id="plato6" class="platos" value="Bondiola">
+                                    <label for="plato6">Sandwich de Bondiola - XX$</label><br>
+                                    <input type="radio" name="plato" id="plato7" class="platos" value="Lomo">
+                                    <label for="plato7">Sandwich de Lomo - XX$</label>
+                                </div>
 
-                <section class="paginas" id="paginaHome">
-                    <h2 class="titulos" id="tituloPaginaHome">
-                        Página Home
-                    </h2>
-                    <article class="articulos" id="articuloHome">
-                        <p> Cuerpo principal del Home --- Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorem harum mollitia asperiores ea autem aliquid, iure odio reiciendis, molestiae, tenetur laudantium consequatur. Beatae aut ad dignissimos accusamus sunt quis!
-                        Optio adipisci omnis a corrupti iure ad vel sequi voluptatem natus ducimus facere minus impedit velit quam veniam odio nemo molestiae explicabo nisi, recusandae architecto perspiciatis soluta amet? Eligendi, incidunt!
-                        Soluta, fugit voluptatem. Possimus, reiciendis in inventore accusamus delectus excepturi facere consequatur recusandae repudiandae sapiente error quam dolore. Ipsam facilis libero veniam debitis illum voluptatibus consequuntur quis quaerat molestiae dicta!
-                        </p>                  
-                        <!-- Un vídeo mostrando la virtudes del producto -->
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/UaUtPvHJlXg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                <div>
+                                    <p id="preguntaPotenciado">¿Quizás desearías acompañar tu plato con un "potenciador"?: </p>
+                                    <input type="checkbox" name="potenciador" id="potenciador1" value="Vegano">
+                                    <label for="potenciador1">Pepinillos+Morrón - XX$</label><br>
+                                    <input type="checkbox" name="potenciador" id="potenciador2" value="Suave">
+                                    <label for="potenciador2">Jamón+Queso - XX$</label><br>
+                                    <input type="checkbox" name="potenciador" id="potenciador3" value="Power">
+                                    <label for="potenciador3">Cebolla+Panceta+Huevo - XX$</label>
+                                </div>
 
-                        <div>
-                            <button onClick="slide('next')">Next</button>
-                        </div>
-                    </article>
+                                <div>
+                                    <p id="preguntarMultiplicador">¿Sos de buen apetito? permitinos sugerirte un multiplicador (de cantidad y precio): </p>
+                                    <input type="radio" name="multiplicador" id="multiplicador1" value="x1" checked>
+                                    <label for="multiplicador1">Simple</label><br>
+                                    <input type="radio" name="multiplicador" id="multiplicador2" value="x2">
+                                    <label for="multiplicador2">Duplicar</label><br>
+                                    <input type="radio" name="multiplicador" id="multiplicador3" value="x3">
+                                    <label for="multiplicador3">Triplicar</label>
+                                </div>
+
+                                <div>
+                                    <p id="preguntarHorario">(*) ¿A qué horario pensás arribar al establecimiento?: </p>
+                                    <input type="radio" name="horario" id="horario1" class="horarios" value="turno 1">
+                                    <label for="horario1">11:00-11:30</label><br>
+                                    <input type="radio" name="horario" id="horario2" class="horarios" value="turno 2">
+                                    <label for="horario2">11:30-12:00</label><br>
+                                    <input type="radio" name="horario" id="horario3" class="horarios" value="turno 3">
+                                    <label for="horario3">12:00-12:30</label><br>
+                                    <input type="radio" name="horario" id="horario4" class="horarios" value="turno 4">
+                                    <label for="horario4">12:30-13:00</label>
+                                </div>
+
+                                <div>
+                                    <p id="preguntaPago">(*) ¿Por cuál medio de pago preferirías abonar? </p>
+                                    <input type="radio" name="medioDePago" id="medioDePago1" class="mediosDePago" value="solo-efectivo">
+                                    <label for="medioDePago1">Efectivo</label><br>
+                                    <input type="radio" name="medioDePago" id="medioDePago2" class="mediosDePago" value="solo-efectivo">
+                                    <label for="medioDePago2">Cash</label><br>
+                                    <input type="radio" name="medioDePago" id="medioDePago3" class="mediosDePago" value="solo-efectivo">
+                                    <label for="medioDePago3">Físico</label>
+                                </div>
+
+                                <div>
+                                    <p id="preguntaPeticiones">Consideraciones especiales: </p>
+                                    <textarea name="peticiones" rows="2" cols="50" maxlength="60" id="peticionesInput">Ninguna</textarea>
+                                </div>
+
+                                <div>
+                                    <input type="submit" value="Enviar reserva" id="botonReserva">
+                                </div>
+
+                            </form>
+                        </article>
+                        <nav class="navegadoras" id="navegadoraPagina4">
+                            <div>
+                                <button onClick="deslizar('retroceder')">Previo</button>
+                            </div>
+                        </nav>
+                    </section>
+
+                    
                 </section>
+            </main>
 
-                <section class="paginas" id="pagina1">
-                    <h2 class="titulos" id="tituloPagina1">
-                        Página 1
-                    </h2>
-                    <nav class="navegadoras" id="navegadoraPagina1">
-                        Barra de navegación de la página 1 <!-- Puede saltar a página Home, solo página 1 si ya estuvo ahí -->
-                        <div>
-                            <button onClick="slide('prev')">Previous</button>
-                            <button onClick="slide('next')">Next</button>
-                        </div>
-                    </nav>
-                    <article class="articulos" id="articulo1">
-                        <p> Cuerpo principal de la página 1 --- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam eveniet asperiores odit inventore magni dolore perferendis fugit voluptatibus, quis tenetur laborum pariatur, saepe accusamus neque ad dicta voluptatem, molestias modi?
-                        Dolorem, voluptatibus magnam tempore sapiente, consectetur dolorum eveniet nam exercitationem aut recusandae doloremque, dicta obcaecati deleniti temporibus minus? Laboriosam illum officiis porro reiciendis dolore, deserunt repudiandae aliquid! Dolorum, reiciendis saepe?
-                        Ad quam repellendus animi officiis esse nam ipsa dolorem iusto. Facilis ab quod repellendus, provident quas adipisci porro atque sequi, cumque cum numquam eaque, eligendi ipsum laborum voluptates rerum voluptate.
-                        Consequuntur eum dolorum debitis tempora corporis porro numquam voluptatibus perferendis, tenetur placeat eveniet in eaque tempore minima sapiente iste, similique sint odit. Debitis vero cumque doloremque architecto dolorum veniam ab!
-                        Eligendi corporis in ipsam doloribus earum commodi error cumque, nisi porro mollitia cupiditate, sapiente nihil ut fugit sequi perspiciatis tempora nobis eius a ratione laborum laudantium officiis? Ratione, esse sit.
-                        Rem, dignissimos reiciendis dolor ad officia laboriosam neque commodi? Fugit magnam excepturi delectus facilis modi ex totam explicabo tenetur repellat repudiandae, officia molestias deserunt cupiditate dicta soluta iure maiores corporis?
-                        Tenetur possimus quam minima recusandae facilis sed deserunt praesentium voluptas corrupti optio commodi maxime, ipsa ea beatae culpa. Amet necessitatibus minus ex quibusdam rerum quae saepe impedit quidem voluptatibus odit!
-                        Itaque at atque autem velit? Voluptas itaque facere doloremque ab officiis odio sint veritatis! Reiciendis vel a, qui dolores eaque debitis perferendis quasi cum aliquid tempore eos architecto, quos nobis!
-                        Tenetur, laudantium nesciunt. Vero, nulla aperiam earum tenetur quae veritatis eos ipsam asperiores saepe impedit iusto sit consequatur sunt autem, soluta modi molestias iste dolorem distinctio iure veniam praesentium reprehenderit!
-                        Libero quis hic similique nihil eum. Fugiat temporibus praesentium iure veritatis dolorum autem cupiditate rerum reiciendis! Voluptatem est doloribus minima odit enim excepturi deserunt, veniam esse ullam quaerat autem fuga.</p>
-                    </article>
-                </section>
+            <footer>
+                <p id="reconocimientos">Esta web utiliza los siguientes assets:
+                <a href="https://www.flaticon.com/free-icons/restaurant" title="restaurant icons">Restaurant icons created by Freepik - Flaticon</a>;
+                <a href="https://www.flaticon.com/free-icons/fast-food" title="fast food icons">Fast food icons created by Smashicons - Flaticon</a>;
+                Vídeo <a href="https://youtu.be/uMktbiDm8x8">"Hamburguesa Paro Cardiaco!" - YouTube</a>;
+                Copyright 2010 The Lobster Project Authors (<a href="https://github.com/impallari/The-Lobster-Font">Fuentes Lobster</a>), with Reserved Font Name "Lobster";
+                Autores varios, imágenes de Freepik (
+                <a href="https://www.freepik.es/foto-gratis/tipos-sandwich-mixto-varios-alimentos-tabla-madera_5543017.htm#page=2&query=hot%20dog&position=20&from_view=search&track=ais">1</a>,
+                <a href="https://www.freepik.es/foto-gratis/vista-frontal-hot-dog-fondo-negro-espacio-copia_10102456.htm#page=2&query=hot%20dog&position=31&from_view=search&track=ais">2</a>,
+                <a href="https://www.freepik.es/foto-gratis/sandwich-grande-varios-tipos-carne-maiz-algunas-hamburguesas-alrededor_17234089.htm#page=2&query=hot%20dog&position=47&from_view=search&track=ais">3</a>,
+                <a href="https://www.freepik.es/foto-gratis/tendir-doner-pollo-mesa_6285309.htm#page=3&query=hot%20dog&position=19&from_view=search&track=ais">4</a>,
+                <a href="https://www.freepik.es/foto-gratis/bodegon-deliciosa-hamburguesa-americana_31051708.htm#page=2&query=hamburger&position=43&from_view=search&track=sph">5</a>,
+                <a href="https://www.freepik.es/foto-gratis/captura-pantalla-cocinero-que-coloca-tocino-frito-sobre-rebanada-queso-mientras-prepara-hamburguesa_27573241.htm#query=hamburger&position=29&from_view=search&track=sph">6</a>,
+                <a href="https://www.freepik.es/foto-gratis/vista-frontal-mujer-comiendo-hamburguesas-carne_9593137.htm#query=hamburger&position=11&from_view=search&track=sph">7</a>,
+                <a href="https://www.freepik.es/foto-gratis/vista-frontal-hamburguesa-stand_9523079.htm#query=hamburger&position=0&from_view=search&track=sph">8</a>,
+                <a href="https://www.freepik.es/foto-gratis/hot-dog-alta-vista-encurtidos-patatas-fritas_10102918.htm#query=hot%20dog&position=43&from_view=search&track=ais">9</a>,
+                <a href="https://www.freepik.es/foto-gratis/arreglo-deliciosos-hot-dogs_21744888.htm#query=hot%20dog&position=5&from_view=search&track=ais">10</a>
+                ).
+                <!--Realmente la fuente la descargué de https://fonts.google.com/specimen/Lobster pero en la documentación decía eso-->
+                </p>
+            </footer>
+        </div>
 
-                <section class="paginas" id="pagina2">
-                    <h2 class="titulos" id="tituloPagina2">
-                        Página 2
-                    </h2>
-                    <nav class="navegadoras" id="navegadoraPagina2">
-                        Barra de navegación de la página 2 <!-- Puede saltar a página Home o página 1, solo página 2 si ya estuvo ahí-->
-                        <div>
-                            <button onClick="slide('prev')">Previous</button>
-                            <button onClick="slide('next')">Next</button>
-                        </div>
-                    </nav>
-                    <article class="articulos" id="articulo2">
-                        <p> Cuerpo principal de la página 2 --- Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque corrupti necessitatibus modi quod qui sapiente neque asperiores quis molestiae, soluta earum consectetur numquam beatae eius illum eaque dolorem, deserunt nemo!
-                        Culpa, sit. Illo aliquid saepe accusamus tempora consequatur ut reiciendis similique facilis asperiores sit nam debitis placeat incidunt eaque ipsum magni earum adipisci, possimus sed nihil fugiat obcaecati officia. Ullam!
-                        Inventore eius ipsum aliquid mollitia vitae, dolorem modi quos reiciendis incidunt pariatur consectetur voluptatibus placeat veritatis iusto distinctio asperiores odit delectus officia doloremque illo quaerat ab laborum fuga eos? Vel.
-                        Ipsum enim sapiente iure omnis nihil itaque rem provident perferendis nostrum! Eos magni enim totam at? Quasi mollitia similique nihil. Quaerat repellendus, iste ducimus atque hic quisquam harum fugiat possimus.
-                        Modi repellat expedita molestias molestiae laborum sequi nisi magni? Ipsa quasi, optio delectus soluta molestias dolore ab nihil excepturi blanditiis quod repudiandae molestiae tempora impedit, hic consequuntur, maiores facilis rerum?
-                        Temporibus unde non possimus magnam illo odit nisi provident minus sapiente aut molestias at velit, rem quidem fuga? Facere optio assumenda sit perspiciatis eligendi quae quo nulla modi, iste quas.
-                        Provident reiciendis dolore tempore voluptate, iusto ipsa! Unde consequuntur beatae amet exercitationem mollitia culpa! Debitis voluptas optio facilis quos architecto qui, est officia corporis? Iusto molestiae neque ipsa beatae tempora!
-                        Accusantium fuga ipsa id qui nobis quasi! Obcaecati nihil facilis deserunt illo culpa, aliquid natus eveniet commodi sed perspiciatis blanditiis, aut maxime, repellendus eos? Deleniti inventore rerum molestiae magnam esse!
-                        Maxime, necessitatibus nulla. Dicta modi repudiandae ullam nulla, odio numquam, repellendus doloremque earum libero id, esse laborum! Pariatur iure sint, recusandae vero impedit nesciunt ex corporis nisi inventore nostrum tempora!
-                        Odio et nostrum omnis voluptatibus unde ex ipsam temporibus vero commodi, illo deleniti dolore corporis similique eius, ducimus ullam repudiandae fuga nemo sunt inventore. Minima quidem deleniti est hic architecto!</p>
-                    </article>
-                </section>
+        <div id="fondo"> <!-- Un fondo con un video, termina de configurarse en la hoja de estilo -->
+            <!-- Con esta configuración el video comienza (autoplay), mudo, sin controles -->
+            <!-- Está en bucle y la 1ra vez reproduce un fragmento particular pero no tiene soporte para hacer bucle solo del fragmento -->
+            <!-- Eso podría refinarse vía java script (pero acá yo no lo he implementado) -->
+            <iframe 
+            id="videoFondo"
+            src="https://www.youtube.com/embed/uMktbiDm8x8?loop=1&playlist=uMktbiDm8x8&start=215&end=479&autoplay=1&mute=1&controls=0"
+            frameBorder="0"
+            allowFullScreen
+            allow="autoplay">
+            </iframe>
+        </div>
+        <!--El script se coloca acá, al final,
+        por que en este define una constante que depende de la clase "paginas".
+        Parece que esa definición no se puede hacer antes que dicha clase exista-->
+        <script src="js/script.js"></script>
 
-                <section class="paginas" id="pagina3">
-                    <h2 class="titulos" id="tituloPagina3">
-                        Página 3
-                    </h2>
-                    <nav class="navegadoras" id="navegadoraPagina3">
-                        Barra de navegación de la página 3 <!-- Puede saltar a página Home o página 2 -->
-                        <div>
-                            <button onClick="slide('prev')">Previous</button>
-                        </div>
-                    </nav>
-                    <article class="articulos" id="articulo3">
-                        <p> Cuerpo principal de la página 3 --- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum, ea iste! Quam corporis, mollitia voluptate maxime dolore, aperiam recusandae cupiditate aspernatur quis officia nulla quaerat, itaque perspiciatis ex sunt et.
-                        Ducimus, nisi quae totam, fugit consequatur perspiciatis odio optio consectetur earum vel fugiat numquam dignissimos? Quidem ab et excepturi. Porro illum saepe dolorem quae mollitia molestias ea ipsa, id velit.
-                        Sit qui animi odio inventore illum ullam. Eaque facere, itaque rem iusto officiis sequi quia excepturi, quos rerum porro reiciendis dignissimos et recusandae, quis necessitatibus maiores iure suscipit. Reprehenderit, necessitatibus?
-                        Distinctio neque aliquid, ab ipsam laboriosam a ea veniam sit quam odit laborum nobis voluptates sint quibusdam assumenda culpa et incidunt! Quisquam tenetur beatae, est asperiores sequi molestiae amet adipisci!
-                        Ipsum voluptatibus architecto ratione optio eum accusamus vitae delectus officia voluptas. Voluptates ducimus porro provident quasi cum? Nostrum laboriosam soluta, rem quasi quidem eligendi dolor ab accusamus ipsam dolores adipisci?
-                        Aliquam quia atque quod blanditiis, aperiam modi similique debitis maxime sunt quaerat esse veniam error fugit soluta aliquid aspernatur cumque corporis quibusdam ut? Ipsum laboriosam commodi impedit molestiae autem veritatis.
-                        Ex ad libero eaque cum? Saepe debitis esse mollitia. Veniam, quas sapiente at ab ipsum neque debitis labore, consequuntur odio dolorum, magnam tenetur minima vero? Cupiditate distinctio quos consequatur quasi.
-                        Quae necessitatibus perspiciatis neque sapiente unde molestias fuga repellat natus quos, optio quia recusandae, dignissimos numquam, iste voluptates quas voluptatibus explicabo. Sed veritatis ab explicabo repellat neque expedita, odit aut?
-                        Explicabo, labore. Nisi omnis voluptate voluptatum sit iste hic recusandae voluptas ratione, tempore maiores labore, aspernatur ullam iure totam. At omnis sit laudantium consequatur dicta exercitationem nobis asperiores veniam porro.
-                        Asperiores doloribus, incidunt magni vero repellendus praesentium minima quaerat esse eveniet libero. Cum, quam eum sed nulla quas dolores perferendis molestiae impedit dolorem itaque, quae quos molestias repudiandae, optio reiciendis!</p>
-                    </article>
-                </section>
-
-            </section>
-        </main>
-
-        <footer>
-            <p id="reconocimientos">Un footer con información de derechos, contacto, etc. --- 
-            <a href="https://www.flaticon.es/iconos-gratis/tenedor" title="tenedor iconos">Tenedor iconos creados por Freepik - Flaticon</a>;
-            Copyright 2010 The Lobster Project Authors (<a href="https://github.com/impallari/The-Lobster-Font">Fuentes Lobster</a>), with Reserved Font Name "Lobster".
-            <!--Realmente la descargué de https://fonts.google.com/specimen/Lobster pero en la documentación decía eso-->
-            </p>
-        </footer>
-        
-        <!-- El script se coloca acá, al final, luego que todo en la página ya fue definido, sino entraría en conflicto -->
-        <script  src="js/script.js"></script>
-        
     </body>
 </html>
